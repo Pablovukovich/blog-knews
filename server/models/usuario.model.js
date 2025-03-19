@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["user", "admin"], // Solo puede ser "user" o "admin"
+        enum:  ["user", "admin","superAdmin"], // Solo puede ser "user" o "admin"
         default: "user"
     },
     lastLogin: {

@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.routes.js';
 import articulosRoutes from './routes/noticias.routes.js'
 import comentariosRoutes from './routes/comentarios.routes.js'
-
+import adminRoutes from './routes/superAdmin.routes.js'
 
 const app = express();
 
@@ -23,6 +23,7 @@ app.use(cookieParser())
 app.use('/api/auth', authRoutes);
 app.use('/api', articulosRoutes )
 app.use('/api/comentarios', comentariosRoutes)
+app.use('/api',adminRoutes)
 
 export default app;
 

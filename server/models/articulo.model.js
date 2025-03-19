@@ -6,7 +6,7 @@ const articuloSchema = new mongoose.Schema({
   contenido: { type: String, required: true },
   fechaPublicacion: { type: Date, default: Date.now },
   categorias: [{ type: String, required: true }],
-  autor: { type: String, default: "Admin", immutable: true }, // Admin fijo
+  autor: { type: String, default: "Knews", immutable: true }, // Admin fijo
   imagen: { type: String, default: "" },
   calificacion: {
     promedio: { type: Number, default: 0 },
