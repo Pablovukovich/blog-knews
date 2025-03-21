@@ -1,8 +1,26 @@
 import Articulo from "../models/articulo.model.js";
 
+
 export const getAll = async (req, res) => {
   try {
-    const articulos = await Articulo.find().populate(
+
+    const validatedQuery = querySchema.safeParse(req.query);
+
+        if (!validatedQuery.success) {
+            return res.status(400).json({
+                success: false,
+                message: validatedQuery.error.errors[0].message,
+            });
+        }
+
+      let filtro = {} //objeto para construir el filtro 
+
+      //si se proporciona la categoria en la query, agregar al filtro 
+      if (validatedQuery.data.categoria) {
+        filtro.categorias = { $in: [validatedQuery.data.categoria] };
+    }
+
+    const articulos = await Articulo.find(filtro).populate(
       "comentarios.usuario",
       "username"
     ); // Trae datos del usuario en los comentarios
@@ -12,6 +30,7 @@ export const getAll = async (req, res) => {
       total: articulos.length,
       articulos,
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
