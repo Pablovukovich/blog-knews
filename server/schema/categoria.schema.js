@@ -8,4 +8,7 @@ export const categoriaSchema = z.string().refine(
 
 export const querySchema = z.object({
     categoria: categoriaSchema.optional(),
-});
+    page: z.string().optional(),  // `page` puede ser un string porque viene de req.query
+    limit: z.string().optional(),
+    sort: z.enum(['fecha', 'popularidad']).optional(),
+  });

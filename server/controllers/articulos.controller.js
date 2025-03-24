@@ -1,33 +1,52 @@
 import Articulo from "../models/articulo.model.js";
 
-
 export const getAll = async (req, res) => {
   try {
-
     const validatedQuery = querySchema.safeParse(req.query);
+    if (!validatedQuery.success) {
+      return res.status(400).json({
+        success: false,
+        message: validatedQuery.error.errors[0].message,
+      });
+    }
+    const { categoria, page, limit } = validatedQuery.data;
 
-        if (!validatedQuery.success) {
-            return res.status(400).json({
-                success: false,
-                message: validatedQuery.error.errors[0].message,
-            });
-        }
-
-      let filtro = {} //objeto para construir el filtro 
-
-      //si se proporciona la categoria en la query, agregar al filtro 
-      if (validatedQuery.data.categoria) {
-        filtro.categorias = { $in: [validatedQuery.data.categoria] };
+       // Construir filtro dinámico
+    let filtro = {};
+    if (categoria) {
+      filtro.categorias = { $in: [categoria] };
     }
 
-    const articulos = await Articulo.find(filtro).populate(
+     // Configurar paginación
+     const pageNumber = page ? parseInt(page) : 1;
+     const limitNumber = limit ? parseInt(limit) : null;
+     const skip = (pageNumber - 1) * (limitNumber || 0);
+     
+      // Definir criterios de ordenación
+      let sortOptions = {};
+      if (sort === 'fecha') {
+          sortOptions = { createdAt: -1 }; // Más recientes primero
+      } else if (sort === 'popularidad') {
+          sortOptions = { likes: -1 }; // Más likes primero
+      }
+
+    const query = await Articulo.find(filtro).populate(
       "comentarios.usuario",
       "username"
-    ); // Trae datos del usuario en los comentarios
+    ).sort(sortOptions)// Aplicamos ordenación; // Trae datos del usuario en los comentarios
 
-    res.status(200).json({
+    if (limitNumber) {
+      query.skip(skip).limit(limitNumber);
+    }
+
+     // Ejecutar la consulta
+     const articulos = await query;
+
+     res.status(200).json({
       success: true,
       total: articulos.length,
+      page: limitNumber ? pageNumber : null,
+      limit: limitNumber || "Todos",
       articulos,
     });
 
@@ -123,15 +142,12 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-
     if (Object.keys(req.body).length === 0) {
-        return res.status(400).json({ 
-            success: false, 
-            message: "No hay datos para actualizar" 
-        });
+      return res.status(400).json({
+        success: false,
+        message: "No hay datos para actualizar",
+      });
     }
-
-
 
     const articulo = await Articulo.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -156,3 +172,37 @@ export const update = async (req, res) => {
     });
   }
 };
+
+export const buscarArticulo = async (req, res) => {
+  try{
+    const {titulo, categoria} = req.query;
+
+    if(titulo){
+      filtro.titulo = { $regex: titulo, $options: "i" }; // "i" para hacer la búsqueda insensible a mayúsculas/minúsculas
+    }
+  
+    if(categoria) {
+      filtro.categoria ={ $in: [categoria] };
+    }
+  
+    const articulos = await Articulo.find(filtro).populate(
+      "comentarios.usuario",
+      "username"
+    );
+  
+    res.status(200).json({
+      success: true,
+      total: articulos.length,
+      articulos,
+    });
+  
+  }catch(error){
+     res.status(500).json({
+      success: false,
+      message: "Error al buscar artículos",
+      error: error.message,
+    });
+  }
+  
+ 
+}
