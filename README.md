@@ -55,5 +55,5 @@ knews/
 Este proyecto se encuentra bajo la licencia MIT.
 
 ## 📩 Contacto
-Si tienes preguntas o sugerencias, contáctame en [tu-email@example.com](mailto:tu-email@example.com).
+Si tienes preguntas o sugerencias, contáctame en [pablovukovich@gmail.com).
 
