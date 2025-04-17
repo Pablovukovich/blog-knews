@@ -1,15 +1,17 @@
 import { Router } from "express";
-import { getAll, getOne, create, update,remove, buscarArticulos } from "../controllers/articulos.controller.js";
+import { getAll, getOne, create, update,remove, buscarArticulo,getBySlug } from "../controllers/articulos.controller.js";
 import { verificarRol } from "../middleware/verificarRol.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = Router()
 
 router.get('/articulos', getAll);
 router.get('/articulos/:id', getOne);
-router.post('/articulos',verificarRol(["superAdmin", "admin"]), create);
+router.get("/articulos/slug/:slug", getBySlug);
+router.post('/articulos',verifyToken,verificarRol(["superAdmin", "admin"]), create);
 router.put('/articulos/:id',verificarRol(["superAdmin", "admin"]), update);
 router.delete('/articulos/:id',verificarRol(["superAdmin", "admin"]), remove);
 
-router.get("/articulos/buscar", buscarArticulos);
+router.get("/articulos/buscar", buscarArticulo);
 
 export default router;

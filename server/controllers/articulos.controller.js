@@ -1,4 +1,5 @@
 import Articulo from "../models/articulo.model.js";
+import { querySchema } from "../schema/categoria.schema.js";
 
 export const getAll = async (req, res) => {
   try {
@@ -9,14 +10,13 @@ export const getAll = async (req, res) => {
         message: validatedQuery.error.errors[0].message,
       });
     }
-    const { categoria, page, limit } = validatedQuery.data;
+    const { categoria, page, limit,sort } = validatedQuery.data;
 
        // Construir filtro dinámico
     let filtro = {};
-    if (categoria) {
+    if (categoria && categoria.toLowerCase() !== "all") {
       filtro.categorias = { $in: [categoria] };
     }
-
      // Configurar paginación
      const pageNumber = page ? parseInt(page) : 1;
      const limitNumber = limit ? parseInt(limit) : null;
@@ -30,13 +30,12 @@ export const getAll = async (req, res) => {
           sortOptions = { likes: -1 }; // Más likes primero
       }
 
-    const query = await Articulo.find(filtro).populate(
-      "comentarios.usuario",
-      "username"
-    ).sort(sortOptions)// Aplicamos ordenación; // Trae datos del usuario en los comentarios
+      let query = Articulo.find(filtro)
+      .populate("comentarios.usuario", "username")
+      .sort(sortOptions);// Aplicamos ordenación; // Trae datos del usuario en los comentarios
 
     if (limitNumber) {
-      query.skip(skip).limit(limitNumber);
+      query = query.skip(skip).limit(limitNumber);
     }
 
      // Ejecutar la consulta
@@ -78,6 +77,33 @@ export const getOne = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error al obtener el articulo",
+      error: error.message,
+    });
+  }
+};
+
+export const getBySlug = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    const articulo = await Articulo.findOne({ slug }).populate(
+      "comentarios.usuario",
+      "username"
+    );
+
+    if (!articulo)
+      return res
+        .status(404)
+        .json({ success: false, message: "Artículo no encontrado" });
+
+    res.status(200).json({
+      success: true,
+      articulo,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error al obtener el artículo por slug",
       error: error.message,
     });
   }
@@ -175,14 +201,16 @@ export const update = async (req, res) => {
 
 export const buscarArticulo = async (req, res) => {
   try{
-    const {titulo, categoria} = req.query;
+    const {titulo, categorias} = req.query;
+
+    let filtro = {};
 
     if(titulo){
       filtro.titulo = { $regex: titulo, $options: "i" }; // "i" para hacer la búsqueda insensible a mayúsculas/minúsculas
     }
   
-    if(categoria) {
-      filtro.categoria ={ $in: [categoria] };
+    if(categorias) {
+      filtro.categorias ={ $in: [categorias] };
     }
   
     const articulos = await Articulo.find(filtro).populate(

@@ -1,0 +1,22 @@
+{
+  "name": "client-knews",
+  "version": "1.0.0",
+  "description": "frontend de knews blog",
+  "main": "index.js",
+ "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pablovukovich/blog-knews.git"
+  },
+  "author": "Pablo Vukovich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pablovukovich/blog-knews/issues"
+  },
+  "homepage": "https://github.com/Pablovukovich/blog-knews#readme"
+}

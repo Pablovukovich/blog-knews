@@ -1,10 +1,11 @@
 import z from 'zod';
-export const categoriaSchema = z.string().refine(
+export const categoriaSchema = z
+  .string()
+  .transform((val) => val.toLowerCase())
+  .refine(
     (val) => ['jennie', 'lisa', 'rose', 'jisoo', 'blackpink'].includes(val),
-    {
-        message: 'Categoría no válida.',
-    }
-);
+    { message: 'Categoría no válida.' }
+  );
 
 export const querySchema = z.object({
     categoria: categoriaSchema.optional(),

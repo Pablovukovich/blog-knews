@@ -4,7 +4,8 @@ import Articulo from "../models/articulo.model.js";
 
 export const crearComentario = async (req, res) => {
   try {
-    const { articuloId, usuarioId, contenido } = req.body;
+    const { articuloId, contenido } = req.body;
+    const usuarioId = req.user.id;
 
     const nuevoComentario = new Comentario({
       usuario: usuarioId,
@@ -35,10 +36,24 @@ export const obtenerComentariosPorArticulo = async (req, res) => {
     //obtenemos los comentarios 
     const comentarios = await Comentario.find({
       articulo: articuloId,
-    }).populate("usuario", "username");
+    })
+    .skip((page - 1) * limit)  // Saltar los comentarios previos según la página
+    .limit(parseInt(limit))  // Limitar el número de comentarios por página
+    .populate("usuario", "username");
+
+    const totalComentarios = await Comentario.countDocuments({
+      articulo: articuloId,
+    });
+
 
     //respuesta
-    res.status(200).json(comentarios);
+    res.status(200).json({
+      comentarios,
+      total: totalComentarios,
+      page: parseInt(page),
+      totalPages: Math.ceil(totalComentarios / limit),
+    });
+    
   } catch (error) {
     res
       .status(500)
