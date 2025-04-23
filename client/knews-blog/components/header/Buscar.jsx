@@ -19,11 +19,15 @@ export default function Buscar() {
       }
 
       try {
-        const { data } = await api.get("/articulos", {
+        const { data } = await api.get("/articulos/buscar", {
           params: { titulo: busqueda }
         });
 
-        setResultados(data.articulos);
+        if (data.success && data.articulos.length > 0) {
+          setResultados(data.articulos);
+        } else {
+          setResultados([]);
+        }
       } catch (error) {
         console.error("Error al buscar artículos:", error);
         setResultados([]);

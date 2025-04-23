@@ -5,8 +5,8 @@ export const generarTokenYSetcookie = (res, userId) => {
 
     res.cookie( "token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: false, //process.env.NODE_ENV === "production",
+        sameSite: "lax",
         maxAge: 604800000 // 7 días
     } )
 

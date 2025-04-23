@@ -25,7 +25,7 @@ export default function CategoriasDropdown () {
                     onClick={() => setOpen(!open)}
                     className="flex items-center gap-2 text-primary hover:border-b-2 hover:border-pink-700  transition duration-300 "
                 >
-                    Categorias
+                    Integrantes
                 </button>
 
                 {open && (
@@ -33,7 +33,7 @@ export default function CategoriasDropdown () {
                         <Link href="/categoria/1" className="flex items-center gap-2 px-4 py-3 hover:bg-second transition">
                              Lisa
                         </Link>
-                        <Link href="/categoria/2" className="flex items-center gap-2 px-4 py-3 hover:bg-second transition">
+                        <Link href="/jennie" className="flex items-center gap-2 px-4 py-3 hover:bg-second transition">
                             Jennie
                         </Link>
                         <Link href="/categoria/3" className="flex items-center gap-2 px-4 py-3 hover:bg-second transition">

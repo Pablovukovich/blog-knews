@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 import Buscar from "./Buscar";
-import LoginDropdown from "./LoginDropdown";
+import LoginDropdown from "./user/LoginDropdown";
 import Logo from "./Logo";
 import Link from "next/link";
 import CategoriasDropdown from "../IU/CategoriasDropdown";
 import { Menu, X } from "lucide-react"; // Iconos de menú y cerrar
+import Users from "./user/Users";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar el menú
@@ -46,9 +47,9 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="" className="text-white hover:text-gray-300">
+              
                 <CategoriasDropdown />
-              </Link>
+              
             </li>
             <li>
               <Link
@@ -64,7 +65,7 @@ function Navbar() {
        
 
         <div className="hidden sm:flex items-center">
-          <LoginDropdown />
+          <Users/>
         </div>
       </nav>
 

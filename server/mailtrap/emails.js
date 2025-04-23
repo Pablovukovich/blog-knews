@@ -1,84 +1,72 @@
-import { mailTrapClient, sender } from "../mailtrap/mailtrap.config.js";
-import { VERIFICATION_EMAIL_TEMPLATE, RESET_PASSWRORD_TEMPLATE,SUCCESS_RESET_PASSWORD } from "./emailTemplate.js";
 
-export const sendVereficationEmail = async (email, verificationToken) => {
-  const recipients = [
-    {
-      email,
-    },
-  ];
+import { VERIFICATION_EMAIL_TEMPLATE,WELCOME_EMAIL_TEMPLATE, RESET_PASSWRORD_TEMPLATE,SUCCESS_RESET_PASSWORD } from "./emailTemplate.js";
+import { resend } from "./mailtrap.config.js";
 
+
+export const sendVereficationEmail =  async (email, verificationToken) => {
   try {
-    const response = await mailTrapClient.send({
-      from: sender,
-      to: recipients,
+    const data = await resend.emails.send({
+      from: process.env.RESEND_SENDER_EMAIL, // Reemplaza con tu dirección de remitente verificada en Resend
+      to: 'pablovukovich@gmail.com', // Resend espera un string o un array de strings
       subject: "Verifica tu dirección de correo electrónico",
       html: VERIFICATION_EMAIL_TEMPLATE.replace(
         "{verificationToken}",
         verificationToken
       ),
-      category: "Verificación de Correo Electrónico",
     });
 
-    console.log("email verificado", response);
+    console.log("Correo de verificación enviado con Resend:", data);
   } catch (error) {
-    console.error(error);
-    throw new Error("No se pudo enviar el correo de verificación");
+    console.error("Error al enviar correo de verificación con Resend:", error);
+    throw new Error("No se pudo enviar el correo de verificación con Resend");
   }
 };
 
-export const sendWelcomeEmail = async (email, username) => {
-  const recipient = [{ email }];
+export const sendWelcomeEmail =  async (email, username) => {
   try {
-    const response = await mailTrapClient.send({
-      from: sender,
-      to: recipient,
-      template_uuid: "59a6de24-cf42-43f9-8b3c-b240147ee9a5",
-      template_variables: {
-        company_info_name: "KNEWS",
-        name: username,
-      },
+    const data = await resend.emails.send({
+      from: process.env.RESEND_SENDER_EMAIL, // Reemplaza con tu dirección de remitente verificada en Resend
+      to: 'pablovukovich@gmail.com',
+      subject: `¡Bienvenido a KNEWS, ${username}!`,
+      html: WELCOME_EMAIL_TEMPLATE.replace(/{username}/g, username) // Reemplaza todas las instancias de {username}
+        .replace(/{email}/g, email),     // Reemplaza todas las instancias de {email}
     });
 
-    console.log("Correo de bienvenida enviado", response);
+    console.log("Correo de bienvenida enviado con Resend:", data);
   } catch (error) {
-    console.error(error);
-    throw new Error("No se pudo enviar el correo de bienvenida");
+    console.error("Error al enviar correo de bienvenida con Resend:", error);
+    throw new Error("No se pudo enviar el correo de bienvenida con Resend");
   }
 };
 
-export const sentPasswordResetEmail = async (email, resetURL) =>{
-    const recipient = [{email}]
+export const sentPasswordResetEmail = async (email, resetURL) => {
+  try {
+    const data = await resend.emails.send({
+      from: process.env.RESEND_SENDER_EMAIL, // Reemplaza con tu dirección de remitente verificada en Resend
+      to: email,
+      subject: "Restablece tu contraseña",
+      html: RESET_PASSWRORD_TEMPLATE.replace("{resetURL}", resetURL),
+    });
 
-    try{
-      const response = await mailTrapClient.send({
-        from: sender,
-        to: recipient,
-        subject: "Restablece tu contraseña",
-        html: RESET_PASSWRORD_TEMPLATE.replace("{resetURL}", resetURL),
-        category: "Password Reset"
-      })
-
-
-    }catch(error){
-      console.log('error al enviar  el email de restablecimiento de contraseña', error)
-      throw new Error(`Error al enviar  el email restablecimiento de contraseña: ${error}`)
-    }
-}
-
-export const sendResetPasswordEmail = async (email) =>{
-  const recipient = [{email}]
-
-  try{
-    const response = await mailTrapClient.send({
-      from: sender,
-      to: recipient,
-      subject: "password reset successfuly",
-      html: SUCCESS_RESET_PASSWORD,
-      category: "Password Reset"
-    })
-  }catch(error){
-    console.error(`Error al enviar el email de restablecimiento de contraseña`, error)
-    throw new Error(`Error al enviar el email de restablecimiento de contraseña: ${error}`);
+    console.log("Correo de restablecimiento de contraseña enviado con Resend:", data);
+  } catch (error) {
+    console.error("Error al enviar el correo de restablecimiento de contraseña con Resend:", error);
+    throw new Error(`Error al enviar el email de restablecimiento de contraseña con Resend: ${error}`);
   }
-}
+};
+
+export const sendResetPasswordEmail =async (email) => {
+  try {
+    const data = await resend.emails.send({
+      from: process.env.RESEND_SENDER_EMAIL, // Reemplaza con tu dirección de remitente verificada en Resend
+      to: email,
+      subject: "Contraseña restablecida exitosamente",
+      html: SUCCESS_RESET_PASSWORD,
+    });
+
+    console.log("Correo de restablecimiento de contraseña exitoso enviado con Resend:", data);
+  } catch (error) {
+    console.error("Error al enviar el correo de restablecimiento de contraseña exitoso con Resend:", error);
+    throw new Error(`Error al enviar el email de restablecimiento de contraseña exitoso con Resend: ${error}`);
+  }
+};

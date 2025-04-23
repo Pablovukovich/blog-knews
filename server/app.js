@@ -9,7 +9,7 @@ import authRoutes from './routes/auth.routes.js';
 import articulosRoutes from './routes/noticias.routes.js'
 import comentariosRoutes from './routes/comentarios.routes.js'
 import adminRoutes from './routes/superAdmin.routes.js'
-
+import likesRoutes from './routes/likes.routes.js'
 const app = express();
 
 // middleware
@@ -27,6 +27,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api', articulosRoutes )
 app.use('/api/comentarios', comentariosRoutes)
 app.use('/api/admin',adminRoutes)
+app.use('/api/likes',likesRoutes )
 
 export default app;
 

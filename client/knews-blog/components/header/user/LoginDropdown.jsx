@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, LogIn, UserPlus } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function LoginDropdown() {
   const [open, setOpen] = useState(false);
@@ -35,12 +36,12 @@ export default function LoginDropdown() {
           exit={{ opacity: 0, y: -10 }}
           className="absolute right-0 mt-2 w-48 bg-secondary text-white shadow-lg rounded-lg overflow-hidden border border-gray-700"
         >
-          <a href="/login" className="flex items-center gap-2 px-4 py-3 hover:bg-second transition">
+          <Link href="/login" className="flex items-center gap-2 px-4 py-3 hover:bg-second transition">
             <LogIn className="w-5 h-5 text-pink-400" /> Iniciar sesión
-          </a>
-          <a href="/register" className="flex items-center gap-2 px-4 py-3 hover:bg-second transition">
+          </Link>
+          <Link href="/register" className="flex items-center gap-2 px-4 py-3 hover:bg-second transition">
             <UserPlus className="w-5 h-5 text-pink-400" /> Registrarse
-          </a>
+          </Link>
         </motion.div>
       )}
     </div>

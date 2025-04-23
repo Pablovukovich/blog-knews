@@ -21,7 +21,7 @@ export default function BarraCategorias() {
               <li key={categoria}>
                 <button 
                 onClick={() => handleClick(categoria)}
-                className={`text-sm px-4 py-2 rounded-full border font-medium transition-all duration-200
+                className={`text-sm px-4 py-2 rounded-full  font-medium transition-all duration-300
                   ${
                     categoriaSeleccionada === categoria
                       ? "bg-primary text-white shadow-md"

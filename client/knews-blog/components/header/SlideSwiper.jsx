@@ -1,19 +1,19 @@
 "use client";
 import { useEffect } from "react";
-import useNoticiasStore from "@/store/useNoticiasStore";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { Navigation, Autoplay } from "swiper/modules";
 import Link from "next/link";
+import useDestacadosStore from "@/store/useDestacadosStore";
 
 export default function SlideSwiper() {
-  const { noticias, cargarNoticias } = useNoticiasStore();
+  const {noticiasDestacadas, cargarNoticiasDestacadas} = useDestacadosStore()
 
   useEffect(() => {
-    cargarNoticias(1, 5); // Solo las 5 más recientes
-  }, [cargarNoticias]);
+    cargarNoticiasDestacadas(5);
+  }, []);
 
   return (
     <Swiper
@@ -22,7 +22,7 @@ export default function SlideSwiper() {
       modules={[Navigation, Autoplay]}
       className="w-full h-[70vh]"
     >
-      {noticias.map((articulo) => (
+      {noticiasDestacadas.map((articulo) => (
         <SwiperSlide key={articulo._id} className="relative h-full">
           <img
             src={articulo.imagen}

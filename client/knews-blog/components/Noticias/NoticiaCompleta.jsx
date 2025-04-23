@@ -1,11 +1,34 @@
 "use client";
 import { Heart, Facebook, Instagram, Twitter } from "lucide-react";
-import { useState } from "react";
+import { use, useState } from "react";
+import api from "@/lib/axios";
 
 export default function NoticiaCompleta({ noticia }) {
+  //likes
   const [liked, setLiked] = useState(false);
+  const [ likedCount, setLikedCount ] = useState(0);
+
+  //comentarios
   const [comentario, setComentario] = useState("");
   const [comentarios, setComentarios] = useState([]);
+
+  // Manejar el evento de like
+  const manejarLike = async () => {
+    try {
+      const response = await api.post(`/likes/articulos/${noticia._id}/like`, null, {
+        withCredentials: true, // ¡Esto es importante!
+      });
+      if (response.status === 200) {
+        const nuevoEstadoLike = response.data.liked;
+        setLiked(nuevoEstadoLike);
+        setLikedCount((prev) => nuevoEstadoLike ? prev + 1 : prev - 1);
+      }
+    } catch (error) {
+      console.error("Error al manejar el like:", error);
+    }
+
+
+  }
 
   const manejarComentario = () => {
     if (comentario.trim()) {
@@ -30,7 +53,7 @@ export default function NoticiaCompleta({ noticia }) {
         </div>
 
         <button
-          onClick={() => setLiked(!liked)}
+          onClick={manejarLike}
           className={`flex items-center gap-1 text-sm px-4 py-2 rounded-full transition ${
             liked
               ? "bg-pink-500 text-white"

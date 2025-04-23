@@ -32,7 +32,7 @@ export default function UltimasNoticias({ noticia }) {
               <div className="flex items-center justify-between mt-4">
                 <p className="text-sm text-gray-600">✍{noticia.autor}</p>
                 <Link href={`/noticias/${noticia.slug}`}>
-                  <button className="bg-primary text-white px-4 py-2 rounded-md">
+                  <button className="bg-primary text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300">
                     Ver más
                   </button>
                 </Link>

@@ -116,7 +116,11 @@ export const login = async (req, res) =>{
 
 //funcion para el logout
 export const logout = async (req, res) => {
-    res.clearCookie("token")
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: false, // tiene que coincidir con la función de seteo
+        sameSite: "lax",
+      })
     res.status(200).json({success: true,message: "Logout exitoso"})
 }
 
