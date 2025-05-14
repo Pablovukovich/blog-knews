@@ -171,70 +171,69 @@ export const WELCOME_EMAIL_TEMPLATE = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido a KNEWS</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #170c10;
-            color: #ffffff;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            background-color: #dd9faf;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 400px;
-            margin: auto;
-        }
-        .header {
-            font-size: 24px;
-            font-weight: bold;
-            color: #170c10;
-        }
-        .message {
-            font-size: 18px;
-            margin-top: 10px;
-            color: #170c10;
-        }
-        .highlight {
-            color: #f79aaf;
-            font-weight: bold;
-        }
-        .user-info {
-            background-color: #ffffff;
-            color: #170c10;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        .footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #170c10;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bienvenido a KNEWS</title>
+  <style>
+    body {
+      background-color: #0f0a0c;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #f3f3f3;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background-color: #1a1114;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.1);
+    }
+    .header {
+      font-size: 28px;
+      font-weight: bold;
+      color: #f79ac0;
+      margin-bottom: 20px;
+    }
+    .subtext {
+      font-size: 16px;
+      color: #c9c4c6;
+      margin-bottom: 20px;
+    }
+    .user-info {
+      background-color: #2a1a20;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #f3f3f3;
+    }
+    .highlight {
+      color: #ff99cc;
+      font-weight: bold;
+    }
+    .footer {
+      font-size: 13px;
+      color: #888;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">¡Bienvenido a <span class="highlight">KNEWS</span>!</div>
-        <p class="message">Hola, <span class="highlight">{username}</span>. Gracias por unirte a nuestra comunidad.</p>
-        <p class="message">Tu cuenta ha sido creada con éxito.</p>
-        <div class="user-info">
-            ✉ Email: {email} <br>
-            👤 Usuario: {username}
-        </div>
-        <p class="message">Ahora puedes explorar las últimas noticias y actualizaciones sobre <strong>Blackpink</strong> y mucho más.</p>
-        <p class="message">Esperamos que disfrutes la experiencia.</p>
-        <p class="footer">Si tienes preguntas, contáctanos. ¡Bienvenido a KNEWS!</p>
+  <div class="container">
+  
+    <div class="header">¡Bienvenido a <span class="highlight">KNEWS</span>!</div>
+    <div class="subtext">Hola <span class="highlight">{username}</span>, gracias por unirte a nuestra comunidad.</div>
+    <div class="subtext">Tu cuenta ha sido creada con éxito.</div>
+    <div class="user-info">
+      ✉ Email: <span class="highlight">{email}</span><br/>
+      👤 Usuario: <span class="highlight">{username}</span>
     </div>
+    <div class="subtext">Ya puedes explorar lo último de <strong>Blackpink</strong> y más contenido exclusivo.</div>
+    <div class="footer">¿Preguntas? Estamos para ayudarte. ¡Disfrutá KNEWS!</div>
+  </div>
 </body>
 </html>
-
-
 `

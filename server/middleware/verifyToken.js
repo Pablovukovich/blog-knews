@@ -22,6 +22,10 @@ export const verifyToken = async (req, res, next) => {
             return res.status(404).json({ success: false, message: "Usuario no encontrado" });
         }
 
+        if (!user.isVerified) {
+            return res.status(403).json({ success: false, message: "Tu email no está verificado" });
+          }
+
         // Guardamos la info del usuario en `req.user`
         req.user = {
             id: user._id,
