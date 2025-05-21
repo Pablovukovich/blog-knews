@@ -1,13 +1,13 @@
 "use client";
 import Boton from "@/components/IU/Boton";
 import useAuthStore from "@/store/useAuthStore";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {loginSchema} from "./../../schema/auth.shema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import AuthRedirect from "@/components/ProtectedRoutes/AuthRedirect";
-
+import Link from "next/link";
 
 export default function Login() {
 
@@ -77,7 +77,7 @@ export default function Login() {
                 <input
                   type="password"
                   placeholder="Contraseña"
-                  className="w-full p-3 mb-6 border border-gray-600 bg-zinc-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full p-3 mb-2 border border-gray-600 bg-zinc-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   {...register('password')}
                 />
                 {errors.password && 
@@ -85,6 +85,11 @@ export default function Login() {
                 {backendError &&
                 <p className="text-red-500 text-sm mb-2">{backendError}</p>}  
                 
+                <Link href="/forgot-password">
+                  <p className="text-sm text-gray-400 hover:text-primary cursor-pointer mb-6">
+                    ¿Olvidaste tu contraseña?
+                  </p>
+                </Link>
                 
 
                 <button
@@ -98,10 +103,10 @@ export default function Login() {
               </form>
 
               <p className="mt-4 text-center text-white">
-                ¿No tienes cuenta?{" "}
-                <a href="/register" className="text-primary hover:underline">
+                ¿No tienes cuenta?
+                <Link href="/register" className="text-primary hover:underline">
                   Regístrate
-                </a>
+                </Link>
               </p>
               <Boton texto="Volver" link="/" />
             </div>

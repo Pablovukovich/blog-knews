@@ -51,16 +51,17 @@ const useAuthStore = create(persist((set) => ({
     },
 
     checkAuth: async () => {
-        set({ loading: true, error: null });
+        set({ isCheckingAuth: true, error: null });
         try {
           const data = await checkAuthAPI();
-          set({ user: data.user, isAuthenticated: true, loading: false });
+          set({ user: data.user, isAuthenticated: true, isCheckingAuth: false });
         } catch (error) {
           set({
             isAuthenticated: false,
             user: null,
             error: error.message || 'Error al autenticar',
-            loading: false,
+            isCheckingAuth: false,
+            isAuthenticated: false,
           });
         }
       },

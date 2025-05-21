@@ -7,6 +7,7 @@ import { registerSchema } from "./../../schema/auth.shema";
 import { zodResolver } from "@hookform/resolvers/zod";  
 import { useRouter } from "next/navigation";
 import AuthRedirect from "@/components/ProtectedRoutes/AuthRedirect";
+import Link from "next/link";
 
 
 
@@ -99,9 +100,9 @@ const Register = () => {
         
                 <p className="mt-4 text-center text-white">
                   ¿Ya tienes una cuenta?{" "}
-                  <a href="/login" className="text-primary hover:underline">
+                  <Link href="/login" className="text-primary hover:underline">
                     Inicia sesión
-                  </a>
+                  </Link>
                 </p>
               <Boton texto="Volver" link="/" />
               </div>
