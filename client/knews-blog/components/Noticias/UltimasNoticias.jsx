@@ -13,7 +13,7 @@ export default function UltimasNoticias({ noticia }) {
     <>
       <div className="flex flex-col md:flex-row justify-between items-start gap-4 w-full">
         <div className="space-y-6 w-full">
-          <div className="flex flex-col md:flex-row bg-gray-100 rounded-lg shadow-md overflow-hidden">
+          <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden">
             <img
               src={noticia.imagen}
               alt={noticia.titulo}

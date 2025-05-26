@@ -69,6 +69,11 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    articulos: Articulo;
+    comentarios: Comentario;
+    categorias: Categoria;
+    mensajes: Mensaje;
+    destacados: Destacado;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +82,11 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    articulos: ArticulosSelect<false> | ArticulosSelect<true>;
+    comentarios: ComentariosSelect<false> | ComentariosSelect<true>;
+    categorias: CategoriasSelect<false> | CategoriasSelect<true>;
+    mensajes: MensajesSelect<false> | MensajesSelect<true>;
+    destacados: DestacadosSelect<false> | DestacadosSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -119,6 +129,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  role: 'user' | 'editor' | 'admin' | 'superadmin';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -151,6 +162,94 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articulos".
+ */
+export interface Articulo {
+  id: string;
+  titulo: string;
+  slug?: string | null;
+  fechaPublicacion?: string | null;
+  categoria: 'jennie' | 'lisa' | 'rose' | 'jisoo' | 'blackpink';
+  imagen?: (string | null) | Media;
+  contenido: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  fuente?: string | null;
+  autor: string;
+  likes?: number | null;
+  popularidad?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comentarios".
+ */
+export interface Comentario {
+  id: string;
+  contenido: string;
+  usuario: string | User;
+  articulo: string | Articulo;
+  fecha?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categorias".
+ */
+export interface Categoria {
+  id: string;
+  nombre: string;
+  descripcion?: string | null;
+  /**
+   * Código HEX para personalizar el color (ej: #ff69b4)
+   */
+  color?: string | null;
+  imagen?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mensajes".
+ */
+export interface Mensaje {
+  id: string;
+  nombre: string;
+  email: string;
+  mensaje: string;
+  leido?: boolean | null;
+  fecha?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "destacados".
+ */
+export interface Destacado {
+  id: string;
+  articulo: string | Articulo;
+  desde: string;
+  hasta: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -163,6 +262,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'articulos';
+        value: string | Articulo;
+      } | null)
+    | ({
+        relationTo: 'comentarios';
+        value: string | Comentario;
+      } | null)
+    | ({
+        relationTo: 'categorias';
+        value: string | Categoria;
+      } | null)
+    | ({
+        relationTo: 'mensajes';
+        value: string | Mensaje;
+      } | null)
+    | ({
+        relationTo: 'destacados';
+        value: string | Destacado;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -211,6 +330,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -238,6 +358,72 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articulos_select".
+ */
+export interface ArticulosSelect<T extends boolean = true> {
+  titulo?: T;
+  slug?: T;
+  fechaPublicacion?: T;
+  categoria?: T;
+  imagen?: T;
+  contenido?: T;
+  fuente?: T;
+  autor?: T;
+  likes?: T;
+  popularidad?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comentarios_select".
+ */
+export interface ComentariosSelect<T extends boolean = true> {
+  contenido?: T;
+  usuario?: T;
+  articulo?: T;
+  fecha?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categorias_select".
+ */
+export interface CategoriasSelect<T extends boolean = true> {
+  nombre?: T;
+  descripcion?: T;
+  color?: T;
+  imagen?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mensajes_select".
+ */
+export interface MensajesSelect<T extends boolean = true> {
+  nombre?: T;
+  email?: T;
+  mensaje?: T;
+  leido?: T;
+  fecha?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "destacados_select".
+ */
+export interface DestacadosSelect<T extends boolean = true> {
+  articulo?: T;
+  desde?: T;
+  hasta?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
