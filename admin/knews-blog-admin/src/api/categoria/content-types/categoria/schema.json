@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categorias",
+  "info": {
+    "singularName": "categoria",
+    "pluralName": "categorias",
+    "displayName": "categoria"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "categoria": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "categoria"
+    },
+    "articulos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::articulo.articulo",
+      "mappedBy": "categorias"
+    }
+  }
+}

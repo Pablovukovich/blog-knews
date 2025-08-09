@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "global_confs",
+  "info": {
+    "singularName": "global-conf",
+    "pluralName": "global-confs",
+    "displayName": "global-conf"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "siteTitle": {
+      "type": "string",
+      "required": true
+    },
+    "siteDescription": {
+      "type": "string"
+    },
+    "logo": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "xlink": {
+      "type": "string"
+    },
+    "instagramLink": {
+      "type": "string"
+    }
+  }
+}

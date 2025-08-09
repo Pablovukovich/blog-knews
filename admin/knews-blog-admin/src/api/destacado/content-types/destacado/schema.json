@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "destacados",
+  "info": {
+    "singularName": "destacado",
+    "pluralName": "destacados",
+    "displayName": "destacado"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "articulosDestacados": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::articulo.articulo"
+    }
+  }
+}

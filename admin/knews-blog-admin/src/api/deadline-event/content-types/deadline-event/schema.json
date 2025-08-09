@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "deadline_events",
+  "info": {
+    "singularName": "deadline-event",
+    "pluralName": "deadline-events",
+    "displayName": "DeadlineEvent",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "paisEstado": {
+      "type": "string",
+      "required": true
+    },
+    "estadio": {
+      "type": "string",
+      "required": true
+    },
+    "fecha": {
+      "type": "date"
+    },
+    "dia": {
+      "type": "enumeration",
+      "enum": [
+        "domingo",
+        "lunes",
+        "martes",
+        "miercoles",
+        "jueves",
+        "viernes",
+        "sabado"
+      ],
+      "required": true
+    },
+    "horario": {
+      "type": "time"
+    },
+    "activo": {
+      "type": "boolean",
+      "required": true
+    }
+  }
+}

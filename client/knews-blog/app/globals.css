@@ -1,6 +1,31 @@
 @import "tailwindcss";
-
+ 
 @theme{
     --color-primary:#f79aaf;
     --color-second: #E91E63;
 }
+
+.my-custom-swiper .swiper-button-next,
+.my-custom-swiper .swiper-button-prev {
+  color: #8C566F; /* Oro */
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+.scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background: #BF84A0;
+    border-radius: 100vh;
+  }
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #a06d85;
+  }
+
+ 

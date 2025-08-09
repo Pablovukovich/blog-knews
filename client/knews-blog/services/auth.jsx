@@ -1,33 +1,41 @@
 import api from "@/lib/axios";
 
-//funciones para hacer las llamadas a los endpoints de backend:
-// registrar usuario, login, verificar email
-export const registrarUser = async (userData) => {
+// Registrar usuario en Strapi
+export const registrarUser = async ({ username, email, password }) => {
   try {
-    const response = await api.post("/auth/register", userData);
-    return response.data;
+    const response = await api.post("/auth/local/register", {
+      username,
+      email,
+      password,
+    });
+    return response.data; // contiene { jwt, user }
   } catch (error) {
-    throw error.response ? error.response.data : error;
+    throw error.response?.data?.error || { message: "Error al registrar" };
   }
 };
 
-export const loginUser = async (credenciales) => {
+// Iniciar sesión en Strapi
+export const loginUser = async ({ identifier, password }) => {
   try {
-    const response = await api.post("/auth/login", credenciales);
-    return response.data;
+    const response = await api.post("/auth/local", {
+      identifier, // puede ser username o email
+      password,
+    });
+    return response.data; // contiene { jwt, user }
   } catch (error) {
-    throw error.response ? error.response.data : error;
+    throw error.response?.data?.error || { message: "Error al iniciar sesión" };
   }
 };
 
-export const verifyEmail = async (code) => {
-    try {
-        const response = await api.post("/auth/verificar-email", { code });
-        return response.data;
-    } catch (error) {
-        throw error.response ? error.response.data : error;
-    }
-}
+
+// export const verifyEmail = async (code) => {
+//     try {
+//         const response = await api.post("/auth/verificar-email", { code });
+//         return response.data;
+//     } catch (error) {
+//         throw error.response ? error.response.data : error;
+//     }
+// }
 
 export const checkAuth = async () => {
     try {
@@ -39,10 +47,10 @@ export const checkAuth = async () => {
 }
 
 export const logoutUser = async () => {
-    try {
-        const response = await api.post("/auth/logout");
-        return response.data;
-    } catch (error) {
-        throw error.response ? error.response.data : error;
-    }
-}
+  try {
+    const response = await api.post("/auth/logout");
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error;
+  }
+};

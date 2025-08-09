@@ -1,25 +1,29 @@
 "use client";
+import { Deadline } from "@/components/deadline/Deadline";
+import { Destacados } from "@/components/destacados/Destacados";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/header/Navbar";
 import SlideSwiper from "@/components/header/SlideSwiper";
-import VerificacionPendienteModal from "@/components/IU/VerificacionPendienteModal";
-import Listen from "@/components/listen/Listen";
-import Noticias from "@/components/Noticias/Noticias";
-import useAuthStore from "@/store/useAuthStore";
+import { Streams } from "@/components/stream/Streams";
+import { UltimasNoticias } from "@/components/ultimasNoticias/UltimasNoticias";
+
+
 
 
 export default function Home() {
 
 
-  const { user } = useAuthStore();
+
 
   return (
     <>
-      {user && !user.isVerified && <VerificacionPendienteModal email={user.email} />}
+      
       <Navbar/>
       <SlideSwiper/>
-      <Noticias/>
-      <Listen/>
+      <Deadline/>
+      <UltimasNoticias/>
+      <Destacados/>
+      <Streams/>
       <Footer/>
     </>
   );

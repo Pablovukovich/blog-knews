@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { persist  } from 'zustand/middleware';
-import {registrarUser, loginUser, verifyEmail} from '../services/auth.jsx'
+import {registrarUser, loginUser, verifyEmail, logoutUser} from '../services/auth.jsx'
 import { checkAuth as checkAuthAPI } from '../services/auth.jsx';
+
 
 const useAuthStore = create(persist((set) => ({
 
@@ -37,18 +38,18 @@ const useAuthStore = create(persist((set) => ({
 
     },
 
-    verifyEmail: async (code) => {
-        set({loading:true, error: null})
-        try{
-            const data = await verifyEmail(code)
-            set({user: data.user, isAuthenticated: true, loading: false})
-            return data
-        }catch(error){
-            set({ error: error.message, loading: false });
-            throw error;
-        }
+    // verifyEmail: async (code) => {
+    //     set({loading:true, error: null})
+    //     try{
+    //         const data = await verifyEmail(code)
+    //         set({user: data.user, isAuthenticated: true, loading: false})
+    //         return data
+    //     }catch(error){
+    //         set({ error: error.message, loading: false });
+    //         throw error;
+    //     }
 
-    },
+    // },
 
     checkAuth: async () => {
         set({ isCheckingAuth: true, error: null });
@@ -66,8 +67,15 @@ const useAuthStore = create(persist((set) => ({
         }
       },
 
-    logout: () => set({ isAuthenticated: false, user: null, error: null }),   
-
+  logout: async () => {
+  try {
+    await logoutUser();
+  } catch (error) {
+    console.error('Error cerrando sesión:', error);
+  } finally {
+    set({ isAuthenticated: false, user: null, error: null });
+  }
+},  
 
 })))
 

@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_slide_slide_items",
+  "info": {
+    "displayName": "slide-item",
+    "icon": "layout",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "titulo": {
+      "type": "string",
+      "maxLength": 100,
+      "required": false
+    },
+    "subtitulo": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "imagen": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "link": {
+      "type": "string"
+    },
+    "articuloRelacionado": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::articulo.articulo"
+    }
+  }
+}

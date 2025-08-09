@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articulos",
+  "info": {
+    "singularName": "articulo",
+    "pluralName": "articulos",
+    "displayName": "articulo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "titulo": {
+      "type": "string",
+      "required": true,
+      "maxLength": 250,
+      "minLength": 1
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "titulo"
+    },
+    "contenido": {
+      "type": "blocks",
+      "required": true
+    },
+    "FechaPublicacion": {
+      "type": "date",
+      "required": true
+    },
+    "imagen": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "fuente": {
+      "type": "string",
+      "required": true
+    },
+    "likes": {
+      "type": "integer",
+      "default": 0
+    },
+    "categorias": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::categoria.categoria",
+      "inversedBy": "articulos"
+    },
+    "resume": {
+      "type": "text"
+    },
+    "autor": {
+      "type": "string",
+      "required": true,
+      "default": "Knews",
+      "regex": "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s\\.-]+$"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}

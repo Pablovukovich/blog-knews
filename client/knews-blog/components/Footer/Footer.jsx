@@ -1,7 +1,7 @@
 export default function Footer  () {
 
     return (
-      <footer className="w-full border-t border-neutral-200 bg-white dark:bg-neutral-900 py-6 mt-16">
+      <footer className="w-full h-auto border-t-1 border-t-[#BF84A0]   dark:bg-neutral-900 py-6 ">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between text-sm text-neutral-500">
           <p>&copy; {new Date().getFullYear()} Knews. Todos los derechos reservados.</p>
           <div className="flex gap-4 mt-4 sm:mt-0">
