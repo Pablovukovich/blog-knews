@@ -400,7 +400,6 @@ export interface ApiArticuloArticulo extends Struct.CollectionTypeSchema {
     fuente: Schema.Attribute.String & Schema.Attribute.Required;
     imagen: Schema.Attribute.Media<'images' | 'files' | 'videos', true>;
     likes: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

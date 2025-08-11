@@ -43,7 +43,7 @@ export const UltimasNoticiasGrid = () => {
                   <h2 className="text-3xl font-bold mb-2">
                     {ultimoArticulo.titulo}
                   </h2>
-                  <p className="text-gray-300 text-lg line-clamp-3">
+                  <p className="text-gray-300 text-lg line-clamp-2">
                     {ultimoArticulo.resume}
                   </p>
                 </div>

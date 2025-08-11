@@ -1,9 +1,11 @@
 import { ArticuloCompleto } from '@/components/articulos/articulo/ArticuloCompleto'
+
 import React from 'react'
 
- const Articulo = () => {
+ const Articulo = ({ params }) => {
+   const { slug } = params;
   return (
-    <ArticuloCompleto/>
+    <ArticuloCompleto slug={slug}/>
   )
 }
 export default Articulo;

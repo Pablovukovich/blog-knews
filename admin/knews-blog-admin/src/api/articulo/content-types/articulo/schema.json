@@ -61,9 +61,6 @@
       "required": true,
       "default": "Knews",
       "regex": "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s\\.-]+$"
-    },
-    "link": {
-      "type": "string"
     }
   }
 }

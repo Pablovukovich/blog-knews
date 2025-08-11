@@ -1,6 +1,5 @@
 
 import Navbar from "@/components/header/Navbar";
-
 import Footer from "@/components/Footer/Footer";
 import { AllArticulos } from "@/components/articulos/AllArticulos";
 import BarraNav from "@/components/IU/BarraNav";

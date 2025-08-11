@@ -12,8 +12,10 @@
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@react-three/fiber": "^9.2.0",
+    "@strapi/blocks-react-renderer": "^1.0.2",
     "axios": "^1.8.4",
     "framer-motion": "^12.23.0",
+    "html-react-parser": "^5.2.6",
     "jose": "^6.0.10",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.485.0",
@@ -33,6 +35,7 @@
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.2.3",
+    "husky": "^9.1.7",
     "tailwindcss": "^4"
   }
 }
