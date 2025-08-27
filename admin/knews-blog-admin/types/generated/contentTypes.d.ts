@@ -597,13 +597,13 @@ export interface ApiGlobalConfGlobalConf extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiSlideHomeSlideHome extends Struct.SingleTypeSchema {
-  collectionName: 'slide_homes';
+export interface ApiSliderSlider extends Struct.CollectionTypeSchema {
+  collectionName: 'sliders';
   info: {
     description: '';
-    displayName: 'slideHome';
-    pluralName: 'slide-homes';
-    singularName: 'slide-home';
+    displayName: 'slider';
+    pluralName: 'sliders';
+    singularName: 'slider';
   };
   options: {
     draftAndPublish: true;
@@ -615,11 +615,13 @@ export interface ApiSlideHomeSlideHome extends Struct.SingleTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::slide-home.slide-home'
+      'api::slider.slider'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    slides: Schema.Attribute.Component<'slide.slide-item', true>;
+    slides: Schema.Attribute.DynamicZone<
+      ['slides.slide-personalizado', 'slides.slide-articulo']
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1144,7 +1146,7 @@ declare module '@strapi/strapi' {
       'api::deadline-event.deadline-event': ApiDeadlineEventDeadlineEvent;
       'api::destacado.destacado': ApiDestacadoDestacado;
       'api::global-conf.global-conf': ApiGlobalConfGlobalConf;
-      'api::slide-home.slide-home': ApiSlideHomeSlideHome;
+      'api::slider.slider': ApiSliderSlider;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

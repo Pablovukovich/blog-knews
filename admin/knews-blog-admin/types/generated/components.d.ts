@@ -1,34 +1,34 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface SlideSlideItem extends Struct.ComponentSchema {
-  collectionName: 'components_slide_slide_items';
+export interface SlidesSlideArticulo extends Struct.ComponentSchema {
+  collectionName: 'components_slides_slide_articulos';
   info: {
-    description: '';
-    displayName: 'slide-item';
-    icon: 'layout';
+    displayName: 'slide_articulo';
   };
   attributes: {
-    articuloRelacionado: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::articulo.articulo'
-    >;
-    imagen: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    link: Schema.Attribute.String;
-    subtitulo: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 200;
-      }>;
-    titulo: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
+    articulo: Schema.Attribute.Relation<'oneToOne', 'api::articulo.articulo'>;
+  };
+}
+
+export interface SlidesSlidePersonalizado extends Struct.ComponentSchema {
+  collectionName: 'components_slides_slide_personalizados';
+  info: {
+    displayName: 'slide_personalizado';
+  };
+  attributes: {
+    descripcion: Schema.Attribute.Text;
+    enlace_boton: Schema.Attribute.String;
+    imagen: Schema.Attribute.Media<'images' | 'files' | 'videos', true>;
+    texto_boton: Schema.Attribute.String;
+    titulo: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'slide.slide-item': SlideSlideItem;
+      'slides.slide-articulo': SlidesSlideArticulo;
+      'slides.slide-personalizado': SlidesSlidePersonalizado;
     }
   }
 }

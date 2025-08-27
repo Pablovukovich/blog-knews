@@ -7,7 +7,7 @@ module.exports = () => ({
         httpOnly: true,
         maxAge: 30 * 24 * 60 * 60 * 1000,
         sameSite: 'lax',
-        domain: process.env.CLIENT_DOMAIN || 'localhost', // Asegúrate de que este dominio coincida con tu frontend
+        domain: process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337/api', // Asegúrate de que este dominio coincida con tu frontend
         path: '/',
       },
       deleteJwtFromResponse: true,

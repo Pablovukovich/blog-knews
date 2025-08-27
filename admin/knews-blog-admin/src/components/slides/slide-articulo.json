@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_slides_slide_articulos",
+  "info": {
+    "displayName": "slide_articulo"
+  },
+  "options": {},
+  "attributes": {
+    "articulo": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::articulo.articulo"
+    }
+  }
+}

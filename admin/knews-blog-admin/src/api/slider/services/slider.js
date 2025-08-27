@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * slide-home service
+ * slider service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::slide-home.slide-home');
+module.exports = createCoreService('api::slider.slider');

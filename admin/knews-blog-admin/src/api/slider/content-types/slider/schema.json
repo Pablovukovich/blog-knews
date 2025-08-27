@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sliders",
+  "info": {
+    "singularName": "slider",
+    "pluralName": "sliders",
+    "displayName": "slider",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "slides": {
+      "type": "dynamiczone",
+      "components": [
+        "slides.slide-personalizado",
+        "slides.slide-articulo"
+      ]
+    }
+  }
+}

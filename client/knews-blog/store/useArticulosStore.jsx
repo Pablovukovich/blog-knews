@@ -13,7 +13,7 @@ const useArticulosStore = create((set) => ({
 
     try {
       const res = await api.get(
-        "/articulos?populate[imagen][fields][0]=url&populate[categorias][fields][0]=categoria&fields[0]=titulo&fields[1]=resume&fields[2]=slug&fields[3]=FechaPublicacion&sort=FechaPublicacion:desc"
+        "/api/articulos?populate[imagen][fields][0]=url&populate[categorias][fields][0]=categoria&fields[0]=titulo&fields[1]=resume&fields[2]=slug&fields[3]=FechaPublicacion&sort=FechaPublicacion:desc"
       );
 
        const data = res.data?.data || [];
@@ -31,7 +31,7 @@ const useArticulosStore = create((set) => ({
     try{
 
       const res = await api.get(
-        "/articulos?populate[imagen][fields][0]=url&populate[categorias][fields][0]=categoria&fields[0]=titulo&fields[1]=resume&fields[2]=slug&fields[3]=FechaPublicacion&sort=FechaPublicacion:desc&pagination[limit]=3"
+        "/api/articulos?populate[imagen][fields][0]=url&populate[categorias][fields][0]=categoria&fields[0]=titulo&fields[1]=resume&fields[2]=slug&fields[3]=FechaPublicacion&sort=FechaPublicacion:desc&pagination[limit]=3"
       ) 
 
       
@@ -49,7 +49,7 @@ const useArticulosStore = create((set) => ({
     set({ loading: true, error: null});
     try{
       const res = await api.get(
-        `/articulos?filters[slug][$eq]=${slug}&populate[imagen][fields][0]=url&populate[categorias][fields][0]=categoria&fields[0]=titulo&fields[1]=contenido&fields[2]=slug&fields[3]=FechaPublicacion&fields[4]=fuente&fields[5]=autor&sort=FechaPublicacion:desc`
+        `/api/articulos?filters[slug][$eq]=${slug}&populate[imagen][fields][0]=url&populate[categorias][fields][0]=categoria&fields[0]=titulo&fields[1]=contenido&fields[2]=slug&fields[3]=FechaPublicacion&fields[4]=fuente&fields[5]=autor&sort=FechaPublicacion:desc`
       )
 
       const data = res.data?.data || [];

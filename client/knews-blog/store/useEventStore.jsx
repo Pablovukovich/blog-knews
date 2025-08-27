@@ -11,7 +11,7 @@ const useEventStore = create((set) => ({
 
     try {
       const res = await api.get(
-        "/deadline-events?fields[0]=paisEstado&fields[1]=estadio&fields[2]=fecha&fields[3]=dia&fields[4]=horario&fields[5]=activo&sort=fecha:desc"
+        "/api/deadline-events?fields[0]=paisEstado&fields[1]=estadio&fields[2]=fecha&fields[3]=dia&fields[4]=horario&fields[5]=activo&sort=fecha:desc"
       );
       const data = res.data?.data || [];
 

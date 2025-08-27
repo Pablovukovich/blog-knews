@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337/api', // Ajusta esto a la URL de tu API de Strapi
+  baseURL: process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337', // Ajusta esto a la URL de tu API de Strapi
   headers: {
     'Content-Type': 'application/json',
   },
